@@ -36,6 +36,7 @@ export const Doc = defineDocumentType(() => ({
   computedFields,
 }))
 
+
 export const Guide = defineDocumentType(() => ({
   name: "Guide",
   filePathPattern: `guides/**/*.mdx`,

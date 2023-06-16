@@ -1,6 +1,8 @@
 import { Inter as FontSans } from "next/font/google"
 import localFont from "next/font/local"
 
+import Script from "next/script";
+
 import "@/styles/globals.css"
 import { siteConfig } from "@/config/site"
 import { absoluteUrl, cn } from "@/lib/utils"
@@ -8,6 +10,11 @@ import { Toaster } from "@/components/ui/toaster"
 import { Analytics } from "@/components/analytics"
 import { TailwindIndicator } from "@/components/tailwind-indicator"
 import { ThemeProvider } from "@/components/theme-provider"
+
+import tokens from "@/config/tokens"
+
+
+const GA_MEASUREMENT_ID = tokens.GA_MEASUREMENT_ID;
 
 const fontSans = FontSans({
   subsets: ["latin"],
@@ -75,6 +82,22 @@ export default function RootLayout({ children }: RootLayoutProps) {
   return (
     <html lang="en" suppressHydrationWarning>
       <head />
+
+      <Script
+        src={`https://www.googletagmanager.com/gtag/js?id=${GA_MEASUREMENT_ID}`}
+        strategy="afterInteractive"
+      />
+      <Script id="google-analytics" strategy="afterInteractive">
+        {`
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){window.dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', '${GA_MEASUREMENT_ID}');
+        `}
+      </Script>
+
+
+
       <body
         className={cn(
           "min-h-screen bg-background font-sans antialiased",
