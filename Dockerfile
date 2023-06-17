@@ -12,6 +12,7 @@ RUN npm install -g serve
 RUN npm install -g pnpm
 #RUN npm ci --legacy-peer-deps
 RUN pnpm install
+#RUN pnpm build   better build directly on dev VM
 # Build the app
 #RUN npm run build
 #RUN npm run preview
@@ -23,4 +24,5 @@ EXPOSE 3000
 # Start the app
 #CMD [ "npx", "serve", "build" ]    # refresh causes 404
 #CMD [ "serve", "-s", "build" ]
-CMD [ "npm", "run", "preview" ]
+#CMD [ "npm", "run", "preview" ]
+CMD [ "pnpm", "start" ]
