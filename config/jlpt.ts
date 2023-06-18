@@ -50,7 +50,7 @@ export const jlptConfig: DocsConfig = {
         },
         {
           title: "Verb: 飛ぶ (tobu) - to fly",
-          href: "/vocabulary/jlpt/verb-tobu-tobu-to-fly",
+          href: "/vocabulary/jlpt/verb-飛ぶ-tobu-to-fly",
         },
         {
           title: "Hanabira Vocabulary JLPT",

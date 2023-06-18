@@ -19,16 +19,35 @@ interface DocPageProps {
   }
 }
 
+// async function getDocFromParams(params) {
+//   const slug = params.slug?.join("/") || ""
+//   const doc = allDocs.find((doc) => doc.slugAsParams === slug)
+//   if (!doc) {
+//     null
+//   }
+//   return doc
+// }
+
+//can process japanese characters in URI
 async function getDocFromParams(params) {
   const slug = params.slug?.join("/") || ""
-  const doc = allDocs.find((doc) => doc.slugAsParams === slug)
+
+  console.log('--------------------------------------------------------------------')
+  console.log('slug: ' + slug)
+  const decodedSlug = decodeURIComponent(slug)
+  console.log('decoded slug: ' + decodedSlug)
+  // const doc = allDocs.find((doc) => doc.slugAsParams === slug)
+  const doc = allDocs.find((doc) => doc.slugAsParams === decodedSlug)
+  console.log('doc: ' + doc)
 
   if (!doc) {
-    null
+    return null
   }
 
   return doc
 }
+
+
 
 export async function generateMetadata({
   params,
