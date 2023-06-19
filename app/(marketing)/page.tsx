@@ -82,7 +82,7 @@ export default async function IndexPage() {
 
             Master essential Japanese vocabulary through comprehensive lessons and interactive exercises. 
             Develop a solid word bank that empowers you to understand and communicate effectively in 
-            various real-life situations, whether it's travel, work, or social interactions.
+            various real-life situations, whether it is travel, work, or social interactions.
           </p>
         </div>
         <div className="mx-auto grid justify-center gap-4 sm:grid-cols-2 md:max-w-[64rem] md:grid-cols-3">
