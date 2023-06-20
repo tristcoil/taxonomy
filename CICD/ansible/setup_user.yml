@@ -1,0 +1,138 @@
+---
+- name: Set up Coil user and install Docker
+  hosts: hanabira
+  become: true
+  gather_facts: true
+  tasks:
+    - name: Create coil user
+      user:
+        name: coil
+        state: present
+        shell: /bin/bash
+        create_home: yes
+
+    - name: Update apt cache
+      apt:
+        update_cache: yes
+
+
+    - name: Install Nginx
+      apt:
+        name: nginx
+        state: present
+
+    - name: Ensure Nginx service is running and enabled
+      systemd:
+        name: nginx
+        state: started
+        enabled: yes
+
+
+    - name: Install Docker
+      apt:
+        name: docker
+        state: present
+
+    - name: Install Docker Compose
+      apt:
+        name: docker-compose
+        state: present
+
+    - name: Ensure Docker service is running and enabled
+      systemd:
+        name: docker
+        state: started
+        enabled: yes
+
+    - name: Add coil user to docker group
+      user:
+        name: coil
+        groups: docker
+        append: yes
+
+    - name: Open ports 80 and 443 in iptables
+      iptables:
+        chain: INPUT
+        protocol: tcp
+        destination_port: "{{ item }}"
+        jump: ACCEPT
+      loop:
+        - 80
+        - 443
+        - 3000
+
+    - name: Create /etc/iptables directory
+      file:
+        path: /etc/iptables
+        state: directory
+
+    - name: Save iptables rules to file
+      shell: /sbin/iptables-save > /etc/iptables/rules.v4
+
+
+
+
+    # --- Certbot related tasks ---
+
+    - name: Install snapd
+      apt:
+        name: snapd
+        state: present
+
+    - name: Enable classic snap support
+      shell: snap install core; snap refresh core
+
+    - name: Remove Certbot OS packages
+      apt:
+        name: certbot
+        state: absent
+
+    - name: Install Certbot snap
+      shell: snap install --classic certbot
+
+    - name: Create symbolic link for Certbot command
+      file:
+        src: /snap/bin/certbot
+        dest: /usr/bin/certbot
+        state: link
+
+
+    # I think this still needs to be run manually in interactive mode
+    #- name: Run Certbot to get and install certificates
+    #  command: certbot --nginx
+    #  args:
+    #    creates: /etc/letsencrypt/live/yourwebsite.com/fullchain.pem
+    #
+    #- name: Test automatic renewal
+    #  command: certbot renew --dry-run
+
+    - name: Reload Nginx service
+      service:
+        name: nginx
+        state: reloaded
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

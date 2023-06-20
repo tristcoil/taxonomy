@@ -1,0 +1,42 @@
+coil@coil-VM:~/Desktop/ansible$ ansible -u root -i ./inventory/hosts -m ping all
+hanabira.org | SUCCESS => {
+    "ansible_facts": {
+        "discovered_interpreter_python": "/usr/bin/python3"
+    },
+    "changed": false,
+    "ping": "pong"
+}
+coil@coil-VM:~/Desktop/ansible$ 
+
+via playbook
+-------------------
+coil@coil-VM:~/Desktop/ansible$ ansible-playbook -i ./inventory/hosts ping_hosts.yml -u root
+
+PLAY [Ping hosts] *******************************************************************************************************************
+
+TASK [Ping host] ********************************************************************************************************************
+ok: [hanabira.org]
+
+PLAY RECAP **************************************************************************************************************************
+hanabira.org               : ok=1    changed=0    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+
+coil@coil-VM:~/Desktop/ansible$ 
+
+
+
+
+make sure you have on ubuntu
+'ufw' simplified firewall package, ansible uses it a lot
+
+
+------------------------------------
+
+run the playbook as
+coil@coil-VM:~/Desktop/ansible$ ansible-playbook -i ./inventory/hosts setup_user.yml -u root
+
+PLAY [Set up Coil user and install Docker] **************************************************
+
+
+
+
+
