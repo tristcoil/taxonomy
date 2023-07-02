@@ -33,6 +33,7 @@ async function getDocFromParams(params) {
   const slug = params.slug?.join("/") || ""
 
   console.log('--------------------------------------------------------------------')
+  console.log('params: ', JSON.stringify(params))
   console.log('slug: ' + slug)
   const decodedSlug = decodeURIComponent(slug)
   console.log('decoded slug: ' + decodedSlug)

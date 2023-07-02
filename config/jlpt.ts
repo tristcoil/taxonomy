@@ -56,6 +56,21 @@ export const jlptConfig: DocsConfig = {
           title: "Hanabira Vocabulary JLPT",
           href: "/vocabulary/jlpt/hanabira-vocabulary",
         },
+
+        {
+          title: "安心する JLPT",
+          href: "/vocabulary/jlpt/verb-安心する-あんしんする-to-be-relieved-to-feel-secure",
+        },
+        {
+          title: "愛用する JLPT",
+          href: "/vocabulary/jlpt/愛用する",
+        },
+        {
+          title: "案内する JLPT",
+          href: "/vocabulary/jlpt/案内する",
+        },
+
+
         {
           title: "Search",
           href: "/vocabulary/in-progress",
